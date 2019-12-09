@@ -18,8 +18,10 @@ class CategoryController extends AbstractController
 {
 
     /**
-     * @Route("/",name="index")
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @return Response
+     * @Route("/",name="index")
      */
     public function index(Request $request, EntityManagerInterface $em): Response
 
@@ -36,8 +38,8 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
         return $this->render('wild/category.html.twig', [
-            'categorys' => $categorys,
-        'form' =>$form->createView(),
+            'categorys'  => $categorys,
+            'form'       => $form->createView(),
         ]);
     }
 
