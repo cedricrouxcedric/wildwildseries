@@ -1,0 +1,20 @@
+nav {
+  background-color: $black;
+  font-size: 2rem;
+  .navbar-brand {
+    color: $red;
+    font-size: 2.5rem;
+  }
+  a {
+    color: $white;
+    &:hover{
+      color: gold;
+    }
+  }
+  .btn {
+    border: solid 1px $red;
+    &:hover {
+      background-color: $red;
+    }
+  }
+}
