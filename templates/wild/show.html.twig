@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ slug }}{% endblock %}
-
 {% block body %}
-
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
         <div class="media-body">
             <h1 class="mt-0">{{ program.title }}</h1>
             <h2><a href="/wild/category/{{ program.category.name }}">Categorie : {{ program.category.name }}</a></h2>
             <h3>{{ program.summary }}</h3>
-
+            <ul>
+                {% for actor in actors %}
+                    <li><a href="{{ path('actor_show',{ 'id': actor.id }) }}">{{ actor.name }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     {% for season in seasons %}
         <div class="media">
-
             <div class="media-body">
                 <h1 class="mt-0">Saison : {{ season.number }}</h1>
                 <h2><a href="/wild/episode/{{ season.id }}">{{ season.description }}</a></h2>
@@ -22,7 +23,8 @@
             </div>
         </div>
     {% endfor %}
+    {% for actor in program.actors %}
 
-   
-
+    {{actor.name}}
+    {% endfor %}
 {% endblock %}

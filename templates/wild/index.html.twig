@@ -8,7 +8,7 @@
     <button type="submit" name="btnSearch">Rechercher</button>
     {{ form_end(form) }}
     {% for program in programs %}
-        <a href="{{ path('show') }}/{{ program.title }}"><h2>{{ loop.index }}/{{ program.title }} - Catégorie
+        <a href="{{ path('wild_show') }}/{{ program.title }}"><h2>{{ loop.index }}/{{ program.title }} - Catégorie
                 : {{ program.category.name }}</h2></a>
         <h2>{{ program.summary }}</h2>
         </div>

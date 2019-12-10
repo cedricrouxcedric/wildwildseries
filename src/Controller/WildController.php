@@ -52,7 +52,7 @@ class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("/show/{slug<^[ a-zA-Z0-9]+$>}", defaults={"slug" = null}, name="show")
+     * @Route("/show/{slug<^[ a-zA-Z0-9]+$>}", defaults={"slug" = null}, name="wild_show")
      * @return Response
      */
     public function show(?string $slug): Response
@@ -75,10 +75,12 @@ class WildController extends AbstractController
             ->findBy([
                 'program' => $program,
             ]);
+        $actors = $program->getActors();
         return $this->render('wild/show.html.twig', [
             'seasons' => $seasons,
             'program' => $program,
             'slug' => $slug,
+            'actors' => $actors,
         ]);
     }
 
@@ -124,7 +126,7 @@ class WildController extends AbstractController
     /**
      * @param string|null $slug
      * @return Response
-     * @Route("/program/{slug<^[ a-zA-Z0-9]+$>}", defaults={"slug" = null}, name="Program")
+     * @Route("/program/{slug<^[ a-zA-Z0-9]+$>}", defaults={"slug" = null}, name="Wild_detail")
      */
     public function showByProgram(?string $slug): Response
     {

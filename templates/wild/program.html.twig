@@ -10,7 +10,13 @@
             <p>Categorie : {{ program.category.name }}</p>
         </div>
     </div>
-        {% for saison in seasons %}
-            <a href="/"> {{ saison.description }} </a>: {{ saison.year }}
-        {% endfor %}
+    {% for season in seasons %}
+        <div class="media">
+            <div class="media-body">
+                <h1 class="mt-0">Saison : {{ season.number }}</h1>
+                <h2><a href="/wild/episode/{{ season.id }}">{{ season.description }}</a></h2>
+                <p></p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
