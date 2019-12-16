@@ -4,6 +4,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Actor;
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -32,7 +33,10 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
         $i = 0;
         foreach (self::ACTORS as $actorName => $data) {
             $actor = new Actor();
+
             $actor->setName($actorName);
+            $slugify = new Slugify();
+            $actor->setSlug($slugify->generate($actor->getName()));
             foreach ($data['program'] as $movie) {
                 $actor->addProgram($this->getReference($movie));
             }
@@ -43,6 +47,8 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 50; $i++) {
             $actor = new Actor();
             $actor->setName($faker->name);
+            $slugify = new Slugify();
+            $actor->setSlug($slugify->generate($actor->getName()));
             $number = rand(0, 5);
             $actor->addProgram($this->getReference("program_" . $number));
             $manager->persist($actor);
