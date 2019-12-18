@@ -53,6 +53,7 @@ class WildController extends AbstractController
         );
     }
 
+
     /**
      *
      * @Route("/show/{slug}", name="show")
@@ -193,7 +194,7 @@ class WildController extends AbstractController
      */
     public function showActor(Actor $actor): Response
     {
-        $programs = $actor->getPrograms();
+        $programs = $actor->getProgram();
         return $this->render('wild/actor.html.twig', [
             'actor' => $actor,
             'programs' => $programs,

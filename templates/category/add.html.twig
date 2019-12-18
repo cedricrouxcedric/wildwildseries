@@ -7,7 +7,7 @@
         <div class="form-group p-2">
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            <button class="btn btn-light">{{ button_label|default('Save') }}</button>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
             {{ form_end(form) }}
         </div>
         <div class="align-self-center"><a class="text-white" href="{{ path('category_new') }}">Add <i

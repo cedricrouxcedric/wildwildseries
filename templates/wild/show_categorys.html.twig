@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="text-black-50 font-weight-bold mt-3">Toutes les Categories</h1>
+                <p>
+                    <a href="{{ path('wild_index') }}" class="btn btn-primary my-2">Toutes les series</a>
+                    <a href="{{path('wild_show_actors')}}" class="btn btn-secondary my-2">Tout les acteurs</a>
+                </p>
+            </div>
+        </section>
+        <div class="container-fluid pad-top ">
+            <div class="album py-5 bg-dark">
+                <div><h1 class="text-center font-weight-bold">Categories</h1></div>
+
+
+                <table class="table text-white">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+                    {% for category in categorys %}
+                        <tr>
+
+                            <td><a href="{{path('wild_show_category')}}/{{ category.name }}"><h2>{{ category.name }}</h2></a></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}

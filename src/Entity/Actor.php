@@ -58,7 +58,7 @@ class Actor
     /**
      * @return Collection|Program[]
      */
-    public function getPrograms(): Collection
+    public function getProgram(): Collection
     {
         return $this->program;
     }
