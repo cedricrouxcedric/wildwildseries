@@ -1,21 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}All programs{% endblock %}
+
 {% block body %}
-    <h1> Toutes les series de la table program :</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.searchField) }}
-    <button type="submit" name="btnSearch">Rechercher</button>
-    {{ form_end(form) }}
-    {% for program in programs %}
-        <a href="{{ path('wild_show') }}/{{ program.title }}"><h2>{{ loop.index }}/{{ program.title }} - Catégorie
-                : {{ program.category.name }}</h2></a>
-        <h2>{{ program.summary }}</h2>
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="text-black-50 font-weight-bold mt-3">Toutes les series</h1>
+                <p>
+                    <a href="{{path('category_index')}}" class="btn btn-primary my-2">Toutes les categories</a>
+                    <a href="{{path('wild_show_actors')}}" class="btn btn-secondary my-2">Tout les acteurs</a>
+                </p>
+            </div>
+        </section>
+        <div class="album py-5 bg-dark">
+            <div class="container">
+                <div class="row">
+                    {% for program in programs %}
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <a href="/wild/show/{{ program.slug }}"><img class="bd-placeholder-img card-img-top" width="100%"
+                                     src="{{ program.poster }}"
+                                     focusable="false" role="img" aria-label="Program poster"><title>
+                                    {{ program.title }}</title></a>
+                                <h2 class="text-black-50">{{ program.category.name }}</h2>
+                                </img>
+                                <div class="card-body">
+                                    <p class="card-text text-black-50">{{ program.summary }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showByProgram/{{ program.slug }}">Saisons</a>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showActorsByProgram/{{ program.slug }}">Acteurs</a>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    {% else %}
-        Aucune série trouvée .
-    {% endfor %}
-
-
+    </main>
 {% endblock %}
 

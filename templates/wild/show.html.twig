@@ -1,30 +1,29 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ slug }}{% endblock %}
+{% block title %}{{ program.title }}{% endblock %}
+
 {% block body %}
-    <div class="media">
-        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="text-black-50 font-weight-bold mt-3">Toutes les saisons de {{ program.title }}</h1>
+            <p>
+                <a href="{{ path('category_index') }}" class="btn btn-primary my-2">Toutes les categories</a>
+                <a href="{{ path('wild_index') }}"class="btn btn-success my-2">Toutes les séries</a>
+                <a href="{{ path('wild_show_actors') }}" class="btn btn-secondary my-2">Tout les acteurs</a>
+            </p>
+        </div>
+    </section>
+    <div class="media container mt-5 pad-top">
+        <img class="align-self-start mr-3 w-25" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
             <h1 class="mt-0">{{ program.title }}</h1>
-            <h2><a href="/wild/category/{{ program.category.name }}">Categorie : {{ program.category.name }}</a></h2>
-            <h3>{{ program.summary }}</h3>
-            <ul>
-                {% for actor in actors %}
-                    <li><a href="{{ path('actor_show',{ 'slug': actor.slug }) }}">{{ actor.name }}</a></li>
-                {% endfor %}
-            </ul>
+            <p>{{ program.summary }}</p>
+            <p>Categorie : {{ program.category.name }}</p>
+            {% for season in seasons %}
+                <div>
+                    <a class="text-white" href="{{ path('wild_program_season', {'id': season.id }) }}">{{ season.description }}</a>
+                </div>
+            {% endfor %}
+            <a href="{{ path('wild_index') }}">Retour à l'accueil</a>
         </div>
     </div>
-    {% for season in seasons %}
-        <div class="media">
-            <div class="media-body">
-                <h1 class="mt-0">Saison : {{ season.number }}</h1>
-                <h2><a href="/wild/episode/{{ season.id }}">{{ season.description }}</a></h2>
-                <p></p>
-            </div>
-        </div>
-    {% endfor %}
-    {% for actor in program.actors %}
-
-    {{actor.name}}
-    {% endfor %}
 {% endblock %}

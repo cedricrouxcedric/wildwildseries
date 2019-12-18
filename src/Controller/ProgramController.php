@@ -70,18 +70,16 @@ class ProgramController extends AbstractController
      * @param Slugify $slugify
      * @return Response
      */
-    public function edit(Request $request, Program $program,Slugify $slugify): Response
+    public function edit(Request $request, Program $program): Response
     {
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
-
+        $slugify = new Slugify();
         if ($form->isSubmitted() && $form->isValid()) {
             $program->setSlug($slugify->generate($program->getTitle()));
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('program_index');
         }
-
         return $this->render('program/edit.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
@@ -89,7 +87,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="program_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="program_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Program $program): Response
     {

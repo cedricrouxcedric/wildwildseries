@@ -1,33 +1,55 @@
-{% block navebar %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand" href="{{ path('app_index') }}">Wild Séries</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto justify-content-lg-start">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('category_index') }}">Toutes les Categories</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Séries
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('wild_index') }}">Toutes les séries</a>
+                </div>
+            </li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/category">All categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('wild_index') }}">All series</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Retour à l'accueil</a>
-                </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Acteurs
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{path('wild_show_actors')}}">Tout les acteurs</a>
 
+                </div>
+            </li>
+        </ul>
+        <ul class="nav justify-content-end">
 
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('program_index') }}">Programmes</a>
+                    <a class="dropdown-item" href="{{ path('program_new') }}">Ajouter un programme</a>
+                    <a class="dropdown-item" href="{{ path('season_index') }}">Saisons</a>
+                    <a class="dropdown-item" href="{{ path('season_new') }}">Ajouter une saison</a>
+                    <a class="dropdown-item" href="{{ path('episode_index') }}">Episodes</a>
+                    <a class="dropdown-item" href="{{ path('episode_new') }}">Ajouter un épisode</a>
+                    <a class="dropdown-item" href="{{ path('category_new') }}">Ajouter une categorie</a>
+                    <a class="dropdown-item" href="{{ path('actor_index') }}">Acteurs</a>
+                    <a class="dropdown-item" href="{{ path('actor_new') }}">Ajouter un acteur</a>
+                </div>
 
-{% endblock %}
+            </li>
+
+        </ul>
+
+    </div>
+</nav>

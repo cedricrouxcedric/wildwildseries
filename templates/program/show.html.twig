@@ -3,10 +3,11 @@
 {% block title %}Program{% endblock %}
 
 {% block body %}
-    <h1>Program</h1>
+    <div class="container-fluid pad-top">
+        <h1>Program</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table text-white">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ program.id }}</td>
@@ -23,30 +24,20 @@
                 <th>Poster</th>
                 <td>{{ program.poster }}</td>
             </tr>
-            <tr>
-                <th>Country</th>
-                <td>{{ program.country }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ program.year }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('program_index') }}">back to list</a>
-
-    <a href="{{ path('program_edit', {'slug': program.slug}) }}">edit</a>
-
-    {{ include('program/_delete_form.html.twig') }}
-
-    <strong> Acteurs :</strong>
-    <ul>
-        {% for actor in program.actors %}
-            <li>{{ actor.name }} </li>
-        {% else %}
-            <li>Aucun acteur pour cette série</li>
-        {% endfor %}
-    </ul>
-
+            </tbody>
+        </table>
+        <strong>Acteur :</strong>
+        <ul>
+            {% for actor in program.actors %}
+                <li><a href="{{ path('wild_show_actor', {'name': actor.name}) }}">{{ actor.name }}</a></li>
+            {% else %}
+                <li>Aucun acteur pour cette série</li>
+            {% endfor %}
+        </ul>
+        <div class="d-flex justify-content-between">
+            <div><a href="{{ path('program_index') }}"><i class="text-light fas fa-arrow-left"></i></a></div>
+            <div><a href="{{ path('program_edit', {'slug': program.slug}) }}"><i class="m-1 text-warning far fa-edit"></i></a></div>
+            <div>{{ include('program/_delete_form.html.twig') }}</div>
+        </div>
+    </div>
 {% endblock %}
