@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Program{% endblock %}
+{% block title %}{{ program.title }}{% endblock %}
 
 {% block body %}
     <div class="container-fluid pad-top">
-        <h1>Program</h1>
+        <h1>{{ program.title }}</h1>
 
         <table class="table text-white">
             <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ program.id }}</td>
-            </tr>
+
+                <img src="{{ program.poster }}">
+
             <tr>
                 <th>Title</th>
                 <td>{{ program.title }}</td>
@@ -19,10 +18,6 @@
             <tr>
                 <th>Summary</th>
                 <td>{{ program.summary }}</td>
-            </tr>
-            <tr>
-                <th>Poster</th>
-                <td>{{ program.poster }}</td>
             </tr>
             </tbody>
         </table>
