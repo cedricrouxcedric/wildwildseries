@@ -1,63 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-dark ">
-    {% if app.user %}
-        {{ app.user.email }}
-        <a href="{{ path('app_logout') }}"> Se déconnecter</a>
-    {% else %}
-        <a href="{{ path('app_login') }}"> Se connecter</a>
-    {% endif %}
-    <a class="navbar-brand" href="{{ path('app_index') }}">Wild Séries</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-black">
+    <a class="navbar-brand text-white" href="{{ path('app_index') }}">Wild Séries</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto justify-content-lg-start">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Categories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('category_index') }}">Toutes les Categories</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Séries
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('wild_index') }}">Toutes les séries</a>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Acteurs
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{path('wild_show_actors')}}">Tout les acteurs</a>
-
-                </div>
-            </li>
-        </ul>
-
-        <ul class="nav justify-content-end">
-
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('program_index') }}">Programmes</a>
-                    <a class="dropdown-item" href="{{ path('program_new') }}">Ajouter un programme</a>
-                    <a class="dropdown-item" href="{{ path('season_index') }}">Saisons</a>
-                    <a class="dropdown-item" href="{{ path('season_new') }}">Ajouter une saison</a>
-                    <a class="dropdown-item" href="{{ path('episode_index') }}">Episodes</a>
-                    <a class="dropdown-item" href="{{ path('episode_new') }}">Ajouter un épisode</a>
-                    <a class="dropdown-item" href="{{ path('category_new') }}">Ajouter une categorie</a>
-                    <a class="dropdown-item" href="{{ path('actor_index') }}">Acteurs</a>
-                    <a class="dropdown-item" href="{{ path('actor_new') }}">Ajouter un acteur</a>
-                </div>
-
-            </li>
-
-        </ul>
-
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active text-white" href="{{ path('category_index') }}">Categories <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-white" href="{{ path('wild_index') }}">Séries</a>
+            <a class="nav-item nav-link text-white" href="{{path('wild_show_actors')}}">Acteurs</a>
+            <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
     </div>
+    {% if app.user %}
+        <p class="nav-link">
+            {{ app.user.email }}
+        </p>
+        <p>
+            <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+        </p>
+    {% else %}
+        <a class="nav-link" href="{{ path('app_login') }}"> Se connecter</a>
+
+        </p>
+    {% endif %}
 </nav>

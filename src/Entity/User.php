@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,6 +34,26 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bio;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+     */
+    private $episode_id;
+
+    public function __construct()
+    {
+        $this->episode_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -109,5 +131,55 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getEpisodeId(): Collection
+    {
+        return $this->episode_id;
+    }
+
+    public function addEpisodeId(Comment $episodeId): self
+    {
+        if (!$this->episode_id->contains($episodeId)) {
+            $this->episode_id[] = $episodeId;
+            $episodeId->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEpisodeId(Comment $episodeId): self
+    {
+        if ($this->episode_id->contains($episodeId)) {
+            $this->episode_id->removeElement($episodeId);
+            // set the owning side to null (unless already changed)
+            if ($episodeId->getAuthor() === $this) {
+                $episodeId->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

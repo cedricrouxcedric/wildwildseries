@@ -16,6 +16,7 @@
         <div class="ml-3">
             <h1 class="mt-0">{{ program.title }}</h1>
             <h2>{{ season.description }}</h2>
+            <h3>Tout les episodes de la saison {{ season.number }} :</h3>
             {% for episode in episodes %}
                 <div>
                     <a class="text-white" href="{{ path('wild_show_episode', {'slug': episode.slug}) }}">{{ episode.slug }}</a>
