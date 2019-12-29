@@ -1,24 +1,57 @@
 {% extends 'base.html.twig' %}
-{% block title %}episodes de program{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <div class="media">
-        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
-        <div class="media-body">
-            <h1 class="mt-0"><a href="/wild/show/{{ program.title }}">{{ program.title }}</a></h1>
-            <h2><a href="/wild/category/{{ program.category.name }}">Categorie : {{ program.category.name }}</a></h2>
-            <h2>{{ program.summary }}</h2>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="text-black-50 font-weight-bold mt-3">episode {{ episode.title }} de <br>{{ program.title }}</h1>
+            <p>
+                <a href="{{ path('category_index') }}" class="btn btn-primary my-2">Toutes les categories</a>
+                <a href="{{ path('wild_index') }}" class="btn btn-success my-2">Toutes les séries</a>
+                <a href="{{ path('wild_show_actors') }}" class="btn btn-secondary my-2">Tout les acteurs</a>
+            </p>
+        </div>
+    </section>
+    <h1 class="mt-2">{{ program.title }}</h1>
+    <div class="media container d-flex flex-column">
+        <img class="align-self-center mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+        <div>
+
+            <h2>Saison :{{ season.description }}</h2>
+            <h3>Episode :{{ episode.title }}</h3>
+            <p>Synopsis :{{ episode.synopsis }}</p>
+        </div>
+        <div>
+            <h2>Commentaires</h2>
+            {% for comment in comments %}
+
+                <ul>
+                    <li>Auteur : {{ comment.author.username }}</li>
+                    <li>Episode : {{ program.title }} : {{ comment.episode.title }}</li>
+                    <li>Commentaire : {{ comment.comment }}</li>
+                    <li>Note : {{ comment.rate }}</li>
+                </ul>
+
+
+            {% endfor %}
+        </div>
+        {% if app.user %}
+            <h2>Ajouter un commentaire</h2>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">Ajouter</button>
+            {{ form_end(form) }}
+        {% endif %}
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="p-5">
+
+        </div>
+
+        <div><p><a href="{{ path('wild_index') }}"> Retour à l'accueil </a>
+            <p>
+            <p><a href="{{ path('wild_program_season', {'id': season.id }) }}"> Retour a la saison </a></p>
         </div>
     </div>
-    <h1><a href="#"> {{ season.description }} </a>: {{ season.year }}</h1>
-
-        {% for episode  in episodes %}
-
-
-                <h1> {{ episode.number }} . {{ episode.title }} </h1>
-                <h2> {{ episode.synopsis }} </h2>
-
-
-        {% endfor %}
-
+    </div>
 {% endblock %}

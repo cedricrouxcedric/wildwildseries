@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add{% endblock %}
+
+{% block body %}
+    <div class="container d-flex justify-content-center flex-column mt-5 pad-top">
+        <h1>Add a category</h1>
+        <div class="form-group p-2">
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+        <div class="align-self-center"><a class="text-white" href="{{ path('category_new') }}">Add <i
+                        class="text-light fas fa-plus"></i></a>
+        </div>
+        <a class="text-white" href="{{ path('category_index') }}">Retour à l'accueil</a>
+    </div>
+{% endblock %}

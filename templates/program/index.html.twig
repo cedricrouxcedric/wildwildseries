@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid table-responsive-sm pad-top">
+        <div class="d-flex justify-content-between">
+            <div><h1>Program index</h1></div>
+            <div class="align-self-center"><a class="text-white" href="{{ path('program_new') }}">Add <i class="text-light fas fa-plus"></i></a></div>
+        </div>
+        <table class="table text-white">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Poster</th>
+                <th>actions</th>
+                <th>Actors</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for program in programs %}
+                <tr>
+                    <td>{{ program.id }}</td>
+                    <td>{{ program.title }}</td>
+                    <td>{{ program.summary }}</td>
+                    <td><img class="w-50" src="{{ program.poster }}" alt=""></td>
+                    <td>
+                        <a href="{{ path('program_show', {'slug': program.slug}) }}"><i class="m-1 text-light fas fa-eye"></i></a>
+                        <a href="{{ path('program_edit', {'slug': program.slug}) }}"><i class="m-1 text-warning far fa-edit"></i></a>
+                    </td>
+                    <td>
+                        {% for actor in program.actors %}
+                            {{ actor.name }} /
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

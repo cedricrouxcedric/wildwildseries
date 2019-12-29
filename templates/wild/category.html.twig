@@ -1,22 +1,44 @@
 {% extends 'base.html.twig' %}
-{% block title %}Catégorie{% endblock %}
+{% block title %}{{ categoryName }}{% endblock %}
 {% block body %}
-    {% for category in categorys %}
-        <div class="media">
-            <div class="media-body">
-                <h1><a href="/wild/category/{{ category.name }}">{{ category.id }} : {{ category.name }}</a></h1>
-            </div>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="text-black-50 font-weight-bold mt-3">Toutes les series de la categorie {{ categoryName }}</h1>
+            <p>
+                <a href="{{ path('category_index') }}" class="btn btn-primary my-2">Toutes les categories</a>
+                <a href="{{ path('wild_index') }}"class="btn btn-success my-2">Toutes les séries</a>
+                <a href="{{ path('wild_show_actors') }}" class="btn btn-secondary my-2">Tout les acteurs</a>
+            </p>
         </div>
-    {% endfor %}
+    </section>
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="row">
+            {% for program in programs %}
+                <div class="media flex-column col-md-4">
+                    <div class="media-img">
+                       <a href="{{ path('wild_show', {'slug':program.slug}) }}"> <img class="mb-3 rounded" src="{{ program.poster }}" alt="{{ program.title }} poster"></a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="mt-0">{{ program.title }}</h2>
+                        <p>{{ program.summary }}</p>
+                        <p>Categorie : {{ program.category.name }}</p>
 
-
-        <h3> Ajouter une catégorie </h3>
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        <button class="btn btn-light">{{ button_label|default('Ajouter') }}</button>
-        {{ form_end(form) }}
-        <br>
-        <h1>Catégories :</h1>
-
-        <a href="{{ path('app_index') }}">Retour à l'accueil</a>
-{% endblock %}
+                    <div class="card-body">
+                        <p class="card-text text-black-50">{{ program.summary }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showByProgram/{{ program.slug }}">Saisons</a>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showActorsByProgram/{{ program.slug }}">Acteurs</a>
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+    <a href="{{ path('wild_index') }}">Retour à l'accueil</a>
+    </div>{% endblock %}

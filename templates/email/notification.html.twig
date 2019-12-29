@@ -1,0 +1,9 @@
+{% extends 'email/base.html.twig' %}
+{% block body %}
+    <h1>{{ program.title }}</h1>
+    <p>Votre patience est recompensée venez decouvrie la nouvele série de wild series</p>
+    <p>Une nouvelle série est disponible sur wildseries.com</p>
+    <img src="{{ program.poster }}" alt="{{ program.title }}">
+    <p>{{ program.summary }}</p>
+    <a href="http://localhost:8000/program/{{ program.slug }}">Click here</a>
+{% endblock %}

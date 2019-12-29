@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episode{% endblock %}
+
+{% block body %}
+    <div class="container-fluid pad-top">
+        <h1>Episode</h1>
+
+        <table class="table text-white">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ episode.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ episode.title }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ episode.number }}</td>
+            </tr>
+            <tr>
+                <th>Synopsis</th>
+                <td>{{ episode.synopsis }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between">
+            <div><a href="{{ path('episode_index') }}"><i class="text-light fas fa-arrow-left"></i>tout les episodes</a></div>
+            <div><a href="{{ path('episode_edit', {'slug': episode.slug}) }}"><i class="m-1 text-warning far fa-edit"></i>Edit</a></div>
+            {{ include('episode/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

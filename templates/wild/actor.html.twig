@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ actor.name }}{% endblock %}
+
+{% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="text-black-50 font-weight-bold mt-3">Toutes les series de {{ actor.name }}</h1>
+            <p>
+                <a href="{{ path('category_index') }}" class="btn btn-primary my-2">Toutes les categories</a>
+                <a href="{{ path('wild_index') }}"class="btn btn-success my-2">Toutes les séries</a>
+                <a href="{{ path('wild_show_actors') }}" class="btn btn-secondary my-2">Tout les acteurs</a>
+            </p>
+        </div>
+    </section>
+    <div class="container justify-content-center mt-5">
+        <h2>{{ actor.name }}</h2>
+        <div>
+            <ul>
+                {% for program in programs %}
+                    <a href="{{ path('wild_show', {'slug':program.slug}) }}"><li>{{ program.title }}</li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
