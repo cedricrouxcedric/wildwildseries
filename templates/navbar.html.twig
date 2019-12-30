@@ -17,10 +17,12 @@
             {{ app.user.email }}
         </p>
         <p>
+            <a href="{{ path('wild_my_profil')}}" class="nav-link">mon profil</a>
             <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
         </p>
     {% else %}
         <a class="nav-link" href="{{ path('app_login') }}"> Se connecter</a>
+        <a class="nav-link" href="{{ path('app_register') }}"> S'inscrire</a>
 
         </p>
     {% endif %}
