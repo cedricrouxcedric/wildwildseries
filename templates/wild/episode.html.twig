@@ -30,6 +30,9 @@
                     <li>Episode : {{ program.title }} : {{ comment.episode.title }}</li>
                     <li>Commentaire : {{ comment.comment }}</li>
                     <li>Note : {{ comment.rate }}</li>
+                    {% if is_granted("ROLE_SUBSCRIBER") and app.user.email == comment.author.email or is_granted("ROLE_ADMIN")%}
+                        <a href="{{ path('wild_delete',{'id' : comment.id}) }}">Delete commentaire</a>
+                    {% endif %}
                 </ul>
 
 
