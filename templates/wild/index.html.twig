@@ -17,6 +17,7 @@
             <div class="container">
                 <div class="row">
                     {% for program in programs %}
+
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
                                 <a href="/wild/show/{{ program.slug }}"><img class="bd-placeholder-img card-img-top" width="100%"
@@ -33,6 +34,11 @@
                                             </button>
                                             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showActorsByProgram/{{ program.slug }}">Acteurs</a>
                                             </button>
+                                            {% if is_granted("ROLE_ADMIN") %}
+                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('program_edit', {'slug': program.slug} ) }}">Editer</a>
+                                                </button>
+
+                                            {% endif %}
                                         </div>
 
                                     </div>

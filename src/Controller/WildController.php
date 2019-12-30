@@ -255,4 +255,28 @@ class WildController extends AbstractController
             'actors' => $actors,
         ]);
     }
+
+    /**
+     * @Route("/deleteComment/{id}", name="delete", methods={"DELETE", "GET"})
+     * @param EntityManagerInterface $entityManager
+     * @param int $id
+     * @return Response
+     */
+    public function delete(EntityManagerInterface $entityManager, int $id):Response
+    {
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
+        $episode = $comment->getEpisode();
+        $entityManager->remove($comment);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('wild_show_episode',['slug' => $episode->getSlug()]);
+    }
+    /**
+     * @Route("/my-profil", name="my_profil")
+     * @return Response
+     */
+    public function profilUser(): Response
+    {
+        return $this->render('security/profil.html.twig');
+    }
 }
