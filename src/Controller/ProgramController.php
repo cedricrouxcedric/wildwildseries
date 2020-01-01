@@ -26,7 +26,7 @@ class ProgramController extends AbstractController
     public function index(ProgramRepository $programRepository): Response
     {
         return $this->render('program/index.html.twig', [
-            'programs' => $programRepository->findAll(),
+            'programs' => $programRepository->findAllActorsInProgram(),
         ]);
     }
 
@@ -112,4 +112,5 @@ class ProgramController extends AbstractController
 
         return $this->redirectToRoute('program_index');
     }
+
 }

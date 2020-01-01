@@ -31,7 +31,7 @@ class WildController extends AbstractController
     {
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findAll();
+            ->findAllWithActors();
 
         if (!$programs) {
             throw $this->createNotFoundException(
@@ -92,13 +92,14 @@ class WildController extends AbstractController
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
             ->findBy(['category' => $category]);
+
         if (!$category) {
             throw $this->createNotFoundException(
                 'No program with ' . $categoryName . ' title, found in program\'s table.'
             );
         }
         return $this->render('wild/category.html.twig', [
-            'programs' => $programs,
+            'programs' => $programs->findAllActorsInProgram(),
             'categoryName' => $categoryName,
         ]);
     }

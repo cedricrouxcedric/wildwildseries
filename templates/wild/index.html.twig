@@ -16,6 +16,7 @@
         <div class="album py-5 bg-dark">
             <div class="container">
                 <div class="row">
+
                     {% for program in programs %}
 
                         <div class="col-md-4">
@@ -28,7 +29,17 @@
                                 </img>
                                 <div class="card-body">
                                     <p class="card-text text-black-50">{{ program.summary }}</p>
+                                    <td>
+                                        <ol>
+                                            {% for actor in program.actors %}
+                                                <li class="text-secondary">{{ actor.name }}</li>
+                                            {% else %}
+                                                <li class="text-secondary">Aucun acteur pour cette série</li>
+                                            {% endfor %}
+                                        </ol>
+                                    </td>
                                     <div class="d-flex justify-content-between align-items-center">
+
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/wild/showByProgram/{{ program.slug }}">Saisons</a>
                                             </button>
