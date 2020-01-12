@@ -99,7 +99,7 @@ class WildController extends AbstractController
             );
         }
         return $this->render('wild/category.html.twig', [
-            'programs' => $programs->findAllActorsInProgram(),
+            'programs' => $programs,
             'categoryName' => $categoryName,
         ]);
     }
