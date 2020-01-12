@@ -22,13 +22,11 @@
                     </ul>
                 {% endfor %}
                 <li>
-                    <a href="{{ path('program_show', {'slug': program.slug}) }}"><i
-                                class="m-1 text-light fas fa-eye"></i></a>
-                    <a href="{{ path('program_edit', {'slug': program.slug}) }}"><i
-                                class="m-1 text-warning far fa-edit"></i></a>
+                    <a href="{{ path('program_show', {'slug': program.slug}) }}">Visualiser</a>
+
                 </li>
                 <li>
-
+                    <a href="{{ path('program_edit', {'slug': program.slug}) }}">Editer</a>
                 </li>
             </ul>
         {% else %}
