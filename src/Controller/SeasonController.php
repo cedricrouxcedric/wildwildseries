@@ -33,18 +33,20 @@ class SeasonController extends AbstractController
         $season = new Season();
         $form = $this->createForm(SeasonType::class, $season);
         $form->handleRequest($request);
+        $program = $season->getProgram();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($season);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Une saison a été ajoutée ');
             return $this->redirectToRoute('season_index');
         }
 
         return $this->render('season/new.html.twig', [
             'season' => $season,
             'form' => $form->createView(),
+            'program' => $program
         ]);
     }
 
@@ -68,13 +70,14 @@ class SeasonController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Une saison a été mise a jour ');
             return $this->redirectToRoute('season_index');
         }
 
         return $this->render('season/edit.html.twig', [
             'season' => $season,
             'form' => $form->createView(),
+
         ]);
     }
 
@@ -87,6 +90,7 @@ class SeasonController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($season);
             $entityManager->flush();
+            $this->addFlash('danger', 'Une saison a été suprimée ');
         }
 
         return $this->redirectToRoute('season_index');
